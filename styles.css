@@ -1,0 +1,211 @@
+/* Gustavo Sampaio - pagina inicial
+   Valores lidos direto do CSS aplicado em eusougustavosampaio.com, mais as
+   posicoes de tinta medidas nos prints (viewport 1363x637).
+
+   IMPORTANTE: o hero tem ALTURA FIXA de 896px e a foto entra em tamanho
+   natural (background-size: auto), nao 100vh + cover. E isso que mantem o
+   enquadramento igual em qualquer altura de janela ou nivel de zoom.        */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --font: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --hero-h: 896px;
+  --hero-bg: #242424;
+  --canvas-w: 980px;      /* canvas centrado que ancora hero e cards */
+  --card-gap: 14px;
+  --card-radius: 23px;
+  --hero-overlap: 32px;   /* os cards sobem por cima do fim do hero */
+}
+
+html { background: #000; }
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: var(--font);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+/* ---------------------------------------------------------------- hero ---- */
+
+.hero {
+  position: relative;
+  height: var(--hero-h);
+  background-color: var(--hero-bg);
+  background-image: url("assets/hero.png");
+  background-size: auto;              /* 2752x1536, tamanho natural */
+  background-position: 58.5454% 11.363%;
+  background-repeat: repeat-y;
+}
+
+/* Toda a pagina se apoia num canvas de 980px CENTRADO, e cada bloco recebe um
+   deslocamento proprio a partir da borda dele - inclusive negativo. E por isso
+   que o nome caminha para a direita quando a janela cresce (medido: G em x=85
+   com 1357px de conteudo e em x=422 com 2031px). Nada aqui depende da ALTURA
+   da janela, que era o defeito do 100vh + cover. */
+.hero__inner {
+  position: absolute;
+  top: 83px;                /* poe o topo da caixa do G em y=98 */
+  left: 0;
+  right: 0;
+  width: var(--canvas-w);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero__name {
+  margin: 0 0 0 -110px;     /* o nome fica a esquerda da borda do canvas */
+  font-weight: 400;
+  display: inline-block;    /* encolhe ate a largura do GUSTAVO */
+  text-align: center;       /* e centra o SAMPAIO nela */
+}
+
+.hero__first,
+.hero__last { display: block; white-space: nowrap; }
+
+.hero__first {
+  font-size: 120px;
+  line-height: 120px;
+  letter-spacing: normal;
+}
+
+.hero__last {
+  font-size: 71px;
+  line-height: 85.2px;
+  letter-spacing: 25px;
+  text-indent: 25px;        /* compensa o tracking que sobra apos a ultima letra */
+  margin-top: -18px;        /* linha de base a 68px da do GUSTAVO */
+}
+
+/* icones sociais - tinta medida: 67 / 81 / 71 / 69 / 42 px de largura,
+   inicios em x = 136 / 265 / 415 / 547 / 690, centros em y=358 */
+
+.social {
+  display: flex;
+  align-items: center;
+  margin-top: 49px;         /* centro dos icones em y=358 */
+  margin-left: -52px;       /* primeiro icone 52px a esquerda do canvas */
+}
+
+/* os vaos do original nao sao iguais (cada glifo tem sua propria largura de
+   avanco na fonte de icones), entao vao um a um em vez de um gap unico */
+.social__link--yt { margin-left: 62px; }
+.social__link--li { margin-left: 69px; }
+.social__link--tt { margin-left: 61px; }
+.social__link--fb { margin-left: 74px; }
+
+.social__link {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  transition: opacity .2s ease;
+}
+
+.social__link:hover { opacity: .75; }
+
+/* viewBox justo a arte, entao altura CSS == altura da tinta */
+.social__link svg { width: auto; height: 67px; }
+.social__link--yt svg { height: 58px; }
+.social__link--li svg { height: 71px; }
+.social__link--tt svg { height: 79px; }
+.social__link--fb svg { height: 77px; }
+
+/* --------------------------------------------------------------- cards ---- */
+
+/* Mesmo canvas de 980px: a coluna de 899px nao fica centrada nele, e sim a
+   30px da borda esquerda (medido: card em x=219 com canvas em x=189). */
+.cards {
+  position: relative;
+  z-index: 2;
+  width: var(--canvas-w);
+  max-width: 100%;
+  margin: calc(var(--hero-overlap) * -1) auto 0;
+  padding: 0 51px 0 30px;   /* 980 - 899 - 30 = 51 */
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.card {
+  display: block;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform .25s ease;
+}
+
+.card:hover { transform: scale(1.012); }
+
+.card img { width: 100%; }
+
+/* -------------------------------------------------------------- footer ---- */
+
+.footer {
+  padding: 22px 16px 30px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
+/* abaixo do canvas, o deslocamento de 30px nao cabe: volta a centrar */
+@media (max-width: 1010px) {
+  .cards { padding: 0 12px; }
+}
+
+/* --------------------------------------------------------------- mobile --- */
+/* O site tem um layout mobile proprio: hero de 769px com a foto em "cover",
+   texto menor e sem tracking, e o nome bem mais abaixo no quadro. */
+
+@media (max-width: 767px) {
+  :root {
+    --hero-h: 769px;
+    --card-gap: 12px;
+    --hero-overlap: 170px;
+  }
+
+  .hero {
+    background-size: cover;
+    background-position: 72.206% 20.1038%;
+  }
+
+  .hero__inner { width: 100%; top: 53.8%; }
+  .hero__name { margin-left: 3%; }
+  .cards { padding: 0 19px; }   /* no mobile o site usa ~19px de goteira */
+
+  .hero__first { font-size: 44px; line-height: 44px; }
+
+  .hero__last {
+    font-size: 29px;
+    line-height: 34.8px;
+    letter-spacing: normal;   /* no mobile o site nao aplica tracking */
+    text-indent: 0;
+    margin-top: -4px;
+  }
+
+  /* icones a ~51% do desktop (o grupo mede 304px no lugar de 596px) e recuados
+     ~26px a mais que o nome, como no desktop. O padding cresce a area de toque
+     e sai das margens, para nao mudar o passo. */
+  .social { margin-top: 26px; margin-left: 3%; padding-left: 17px; }
+  .social__link { padding: 8px; }
+  .social__link--yt { margin-left: 16px; }
+  .social__link--li { margin-left: 19px; }
+  .social__link--tt { margin-left: 15px; }
+  .social__link--fb { margin-left: 22px; }
+  .social__link svg { height: 34px; }
+  .social__link--yt svg { height: 30px; }
+  .social__link--li svg { height: 36px; }
+  .social__link--tt svg { height: 40px; }
+  .social__link--fb svg { height: 39px; }
+
+  .footer { font-size: 13px; padding: 20px 16px 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .social__link { transition: none; }
+  .card:hover { transform: none; }
+}
