@@ -15,7 +15,7 @@
   --canvas-w: 980px;      /* canvas centrado que ancora hero e cards */
   --card-gap: 14px;
   --card-radius: 23px;
-  --hero-overlap: 32px;   /* os cards sobem por cima do fim do hero */
+  --hero-overlap: 70px;   /* os cards sobem por cima do fim do hero */
 }
 
 html { background: #000; }
@@ -133,6 +133,7 @@ img { display: block; max-width: 100%; height: auto; }
 
 .card {
   display: block;
+  border: 2px solid #fff;
   border-radius: var(--card-radius);
   overflow: hidden;
   transition: transform .25s ease;
@@ -165,7 +166,7 @@ img { display: block; max-width: 100%; height: auto; }
   :root {
     --hero-h: 769px;
     --card-gap: 12px;
-    --hero-overlap: 170px;
+    --hero-overlap: 208px;
   }
 
   .hero {
