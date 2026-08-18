@@ -197,11 +197,11 @@ img { display: block; max-width: 100%; height: auto; }
   .social__link--li { margin-left: 19px; }
   .social__link--tt { margin-left: 15px; }
   .social__link--fb { margin-left: 22px; }
-  .social__link svg { height: 30px; }
-  .social__link--yt svg { height: 26px; }
-  .social__link--li svg { height: 32px; }
-  .social__link--tt svg { height: 35px; }
-  .social__link--fb svg { height: 34px; }
+  .social__link svg { height: 26px; }
+  .social__link--yt svg { height: 23px; }
+  .social__link--li svg { height: 28px; }
+  .social__link--tt svg { height: 31px; }
+  .social__link--fb svg { height: 30px; }
 
   .footer { font-size: 13px; padding: 20px 16px 26px; }
 }
