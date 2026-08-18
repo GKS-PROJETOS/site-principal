@@ -59,7 +59,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 .hero__name {
-  margin: 0 0 0 -110px;     /* o nome fica a esquerda da borda do canvas */
+  margin: 0 0 0 -38px;      /* centrado com a fileira de icones sociais abaixo */
   font-weight: 400;
   display: inline-block;    /* encolhe ate a largura do GUSTAVO */
   text-align: center;       /* e centra o SAMPAIO nela */
