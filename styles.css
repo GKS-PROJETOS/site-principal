@@ -166,7 +166,7 @@ img { display: block; max-width: 100%; height: auto; }
   :root {
     --hero-h: 769px;
     --card-gap: 12px;
-    --hero-overlap: 208px;
+    --hero-overlap: 140px;
   }
 
   .hero {
@@ -188,20 +188,21 @@ img { display: block; max-width: 100%; height: auto; }
     margin-top: -4px;
   }
 
-  /* icones a ~51% do desktop (o grupo mede 304px no lugar de 596px) e recuados
-     ~26px a mais que o nome, como no desktop. O padding cresce a area de toque
-     e sai das margens, para nao mudar o passo. */
+  /* icones maiores que a proporcao literal do desktop (o clone original tinha
+     ficado pequeno e colado nos cards abaixo) e recuados ~26px a mais que o
+     nome, como no desktop. O padding cresce a area de toque e sai das
+     margens, para nao mudar o passo. */
   .social { margin-top: 26px; margin-left: 3%; padding-left: 17px; }
   .social__link { padding: 8px; }
-  .social__link--yt { margin-left: 16px; }
-  .social__link--li { margin-left: 19px; }
-  .social__link--tt { margin-left: 15px; }
-  .social__link--fb { margin-left: 22px; }
-  .social__link svg { height: 26px; }
-  .social__link--yt svg { height: 23px; }
-  .social__link--li svg { height: 28px; }
-  .social__link--tt svg { height: 31px; }
-  .social__link--fb svg { height: 30px; }
+  .social__link--yt { margin-left: 22px; }
+  .social__link--li { margin-left: 26px; }
+  .social__link--tt { margin-left: 21px; }
+  .social__link--fb { margin-left: 30px; }
+  .social__link svg { height: 36px; }
+  .social__link--yt svg { height: 31px; }
+  .social__link--li svg { height: 38px; }
+  .social__link--tt svg { height: 42px; }
+  .social__link--fb svg { height: 41px; }
 
   .footer { font-size: 13px; padding: 20px 16px 26px; }
 }
