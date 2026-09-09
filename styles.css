@@ -103,10 +103,30 @@ img { display: block; max-width: 100%; height: auto; }
   color: #fff;
   display: flex;
   align-items: center;
-  transition: opacity .2s ease;
+  transform-origin: center;
+  transition: transform .3s cubic-bezier(.2,.8,.3,1.35),
+              color .25s ease,
+              filter .25s ease;
 }
 
-.social__link:hover { opacity: .75; }
+/* hover so onde existe mouse de verdade - no toque o :hover fica grudado */
+@media (hover: hover) and (pointer: fine) {
+  .social__link:hover {
+    transform: translateY(-7px) scale(1.09);
+    color: #f5c56b;                                    /* mesmo ambar das luzes do hero */
+    filter: drop-shadow(0 8px 16px rgba(245, 197, 107, .42));
+  }
+}
+
+/* mesmo destaque para quem navega pelo teclado */
+.social__link:focus-visible {
+  outline: none;
+  transform: translateY(-7px) scale(1.09);
+  color: #f5c56b;
+  filter: drop-shadow(0 8px 16px rgba(245, 197, 107, .42));
+}
+
+.social__link:active { transform: translateY(-2px) scale(1.02); }
 
 /* viewBox justo a arte, entao altura CSS == altura da tinta */
 .social__link svg { width: auto; height: 67px; }
@@ -209,4 +229,6 @@ img { display: block; max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   .card, .social__link { transition: none; }
   .card:hover { transform: none; }
+  /* sem o salto: so a cor ambar marca o icone sob o mouse */
+  .social__link:hover, .social__link:focus-visible, .social__link:active { transform: none; }
 }
