@@ -232,3 +232,60 @@ img { display: block; max-width: 100%; height: auto; }
   /* sem o salto: so a cor ambar marca o icone sob o mouse */
   .social__link:hover, .social__link:focus-visible, .social__link:active { transform: none; }
 }
+
+/* ------------------------------------------------- escolha do contato ---- */
+/* Tela cheia aberta pelo banner "Contato comercial e assessoria" (#contato).
+   Os dois banners antigos viram as duas opcoes. */
+
+.escolha {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: #000;
+  overflow-y: auto;
+}
+
+.escolha:target { display: flex; }
+.escolha--fechada:target { display: none; }
+body:has(.escolha:target:not(.escolha--fechada)) { overflow: hidden; }
+
+.escolha__inner {
+  /* os dois banners cabem na tela sem rolar: altura do banner = largura / 2,8 */
+  width: min(899px, calc((100vh - 170px) * 1.4));
+  max-width: 100%;
+  margin: auto;
+  padding: 40px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.escolha__titulo {
+  margin: 0;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.escolha__opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.escolha__voltar {
+  align-self: center;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 10px 16px;
+  opacity: .75;
+}
+
+.escolha__voltar:hover, .escolha__voltar:focus-visible { opacity: 1; text-decoration: underline; }
+
+@media (max-width: 767px) {
+  .escolha__inner { padding: 32px 19px; gap: 18px; }
+  .escolha__titulo { font-size: 24px; }
+}
