@@ -227,7 +227,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card, .social__link { transition: none; }
+  .card, .social__link, .contato__btn { transition: none; }
   .card:hover { transform: none; }
   /* sem o salto: so a cor ambar marca o icone sob o mouse */
   .social__link:hover, .social__link:focus-visible, .social__link:active { transform: none; }
@@ -251,8 +251,7 @@ img { display: block; max-width: 100%; height: auto; }
 body:has(.escolha:target:not(.escolha--fechada)) { overflow: hidden; }
 
 .escolha__inner {
-  /* os dois banners cabem na tela sem rolar: altura do banner = largura / 2,8 */
-  width: min(899px, calc((100vh - 170px) * 1.4));
+  width: 899px;
   max-width: 100%;
   margin: auto;
   padding: 40px 12px;
@@ -269,10 +268,61 @@ body:has(.escolha:target:not(.escolha--fechada)) { overflow: hidden; }
 }
 
 .escolha__opcoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 14/10/2026: cada contato e um cartao com a foto do perfil do WhatsApp e o
+   botao, no lugar dos dois banners. Borda branca e raio iguais aos da vitrine. */
+.contato {
   display: flex;
   flex-direction: column;
-  gap: var(--card-gap);
+  align-items: center;
+  text-align: center;
+  padding: 34px 24px 30px;
+  border: 2px solid #fff;
+  border-radius: var(--card-radius);
+  background: #111;
 }
+
+.contato__foto {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 3px solid #f5c56b;                     /* o ambar dos icones do hero */
+  box-shadow: 0 0 0 6px rgba(245, 197, 107, .14);
+  background: #242424;
+  color: #f5c56b;
+  font-size: 54px;
+  font-weight: 700;
+}
+.contato__foto img { width: 100%; height: 100%; object-fit: cover; }
+
+.contato__nome { margin: 20px 0 0; font-size: 26px; font-weight: 700; }
+.contato__num { margin: 8px 0 0; font-size: 18px; letter-spacing: .02em; }
+
+.contato__btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 100px;
+  background: #1E7D45;                            /* verde do WhatsApp escurecido, como na /palestras */
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.contato__btn svg { width: 22px; height: 22px; fill: currentColor; }
+.contato__btn:hover, .contato__btn:focus-visible { background: #249250; transform: translateY(-2px); }
 
 .escolha__voltar {
   align-self: center;
@@ -288,4 +338,8 @@ body:has(.escolha:target:not(.escolha--fechada)) { overflow: hidden; }
 @media (max-width: 767px) {
   .escolha__inner { padding: 32px 19px; gap: 18px; }
   .escolha__titulo { font-size: 24px; }
+  .escolha__opcoes { grid-template-columns: 1fr; gap: 14px; }
+  .contato { padding: 24px 18px 22px; }
+  .contato__foto { width: 104px; height: 104px; font-size: 42px; }
+  .contato__nome { margin-top: 14px; font-size: 22px; }
 }

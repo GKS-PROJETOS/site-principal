@@ -92,15 +92,23 @@
 <section class="escolha" id="contato" aria-labelledby="escolha-titulo">
   <div class="escolha__inner">
     <h2 class="escolha__titulo" id="escolha-titulo">Com quem você quer falar?</h2>
+    <!-- 14/10/2026: no lugar dos dois banners, a foto do perfil de cada WhatsApp + o botao.
+         Fotos em assets/contato/, recortadas no rosto em 400x400 (21/10/2026). -->
     <div class="escolha__opcoes">
-      <a class="card" href="https://wa.me/5562981084247?text=Ol%C3%A1%21%20Vim%20atrav%C3%A9s%20do%20Instagram%20do%20Gustavo%20e%20gostaria%20de%20falar%20com%20o%20comercial.">
-        <img src="assets/banners/05-contato-comercial.png" width="1800" height="643"
-             alt="Contato comercial">
-      </a>
-      <a class="card" href="https://wa.me/5562981081683?text=Ol%C3%A1%21%20Vim%20atrav%C3%A9s%20do%20Instagram%20do%20Gustavo%20e%20gostaria%20de%20falar%20com%20a%20assessoria.">
-        <img src="assets/banners/04-contato-assessoria.png" width="1800" height="643"
-             alt="Contato assessoria">
-      </a>
+      <div class="contato">
+        <span class="contato__foto"><img src="assets/contato/comercial.jpg" width="400" height="400" alt="Foto do comercial"></span>
+        <h3 class="contato__nome">Comercial</h3>
+        <p class="contato__num">(62) 98108-4247</p>
+        <a class="contato__btn" href="https://wa.me/5562981084247?text=Ol%C3%A1%21%20Vim%20atrav%C3%A9s%20do%20Instagram%20do%20Gustavo%20e%20gostaria%20de%20falar%20com%20o%20comercial." aria-label="Falar com o comercial no WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.2-1.16l-.3-.18-3 .78.8-2.93-.2-.31A8.2 8.2 0 1 1 12 20.2zm4.6-5.8c-.25-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.12-.17.25-.66.82-.8 1-.15.17-.3.19-.55.06-.25-.12-1.07-.39-2.03-1.25-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.07-.12-.57-1.37-.78-1.88-.2-.49-.41-.42-.57-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.6c.13.18 1.78 2.72 4.3 3.81.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.5-.61 1.7-1.2.22-.59.22-1.09.16-1.2-.07-.1-.23-.16-.48-.29z"/></svg>Falar no WhatsApp</a>
+      </div>
+      <div class="contato">
+        <span class="contato__foto"><img src="assets/contato/assessoria.jpg" width="400" height="400" alt="Foto da assessoria"></span>
+        <h3 class="contato__nome">Assessoria</h3>
+        <p class="contato__num">(62) 98108-1683</p>
+        <a class="contato__btn" href="https://wa.me/5562981081683?text=Ol%C3%A1%21%20Vim%20atrav%C3%A9s%20do%20Instagram%20do%20Gustavo%20e%20gostaria%20de%20falar%20com%20a%20assessoria." aria-label="Falar com a assessoria no WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.2-1.16l-.3-.18-3 .78.8-2.93-.2-.31A8.2 8.2 0 1 1 12 20.2zm4.6-5.8c-.25-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.57.12-.17.25-.66.82-.8 1-.15.17-.3.19-.55.06-.25-.12-1.07-.39-2.03-1.25-.75-.67-1.26-1.5-1.4-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.07-.12-.57-1.37-.78-1.88-.2-.49-.41-.42-.57-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.6c.13.18 1.78 2.72 4.3 3.81.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.5-.61 1.7-1.2.22-.59.22-1.09.16-1.2-.07-.1-.23-.16-.48-.29z"/></svg>Falar no WhatsApp</a>
+      </div>
     </div>
     <a class="escolha__voltar" href="#" data-fecha-contato>&larr; Voltar</a>
   </div>
