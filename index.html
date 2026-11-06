@@ -8,13 +8,20 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <!-- 05/11/2026: carregamento no celular. A foto do hero (LCP) e a Inter saem do proprio
      dominio e comecam a baixar antes do CSS; a Inter e o mesmo arquivo do Google Fonts. -->
-<link rel="preload" href="assets/hero.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="assets/hero.webp" as="image" type="image/webp" fetchpriority="high" media="(min-width: 481px)">
+<link rel="preload" href="assets/hero-mobile.webp" as="image" type="image/webp" fetchpriority="high" media="(max-width: 480px)">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<!-- 06/11/2026: sem JavaScript a foto e os banners aparecem direto, sem a entrada suave. -->
+<noscript><style>.hero::after, .card img { opacity: 1; }</style></noscript>
 </head>
 <body>
 
-<section class="hero">
+<!-- 06/11/2026: internet lenta. A previa borrada (embutida aqui, ~300 bytes) aparece na hora;
+     a foto nitida so entra quando terminou de baixar e decodificar, de uma vez,
+     em vez de ir surgindo de cima para baixo. Ate 480px vem a hero-mobile.webp, so o recorte
+     que o celular mostra. -->
+<section class="hero" style="--hero-lqip: url(data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAABwBQCdASowABsAPtlWo0yoJKMiMBqtUQAbCWMAAQyK1hqzoE0tYJxAhGfFHcoTVRhbI9xgAP75HWPxkXL2fgQP5U3T83Io8x6XPVzHMbJOcxyWMXwRbSstMUUvcEGARSus5xWHzC1FF/fILRscPnLRj7cVNi32t1q4QaS2cKFP3X+mHllnUeh+tAInXF5vPe7q5S3uMczfcVqTsHlWr+s0DR50aRGbUBXVvccSuzIIEIUeArwaR2aIhWAAAA==); --hero-lqip-m: url(data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBgCdASoYACUAPt1iqk8opSQiJWzJEBuJYgC93sABstxbtkHlxo9fT/5Rm1OozHZw/dm1IlLrFz4Iv15UAAD+repUKAZnxWOk0LkHgkM89qSQkLlmeiub4pfkZWDdx8t80uGifGJeK2tw2fqt1vcY33retumD+LYsWMR3UwuAd5kCw9fCsi7DQAEb1OBj1xDXMuSUFGOS97fHSKc6KbtFYOEbHtqbVxtMk1Bi6VewXkUW4XW964p03phFqw/1mMZvF3GPGGJgVR/S+KfZkuQ8I+6HHb2FS4QJvpc2FxeUWY/rvNRLibmEBuBOCXVL1rQGzHyczS3k1rBoUHDPvdeuewAAAA==)">
   <div class="hero__inner">
     <h1 class="hero__name">
       <span class="hero__first">GUSTAVO</span>
@@ -54,50 +61,62 @@
     </nav>
   </div>
 </section>
+<script>
+  (function () {
+    var hero = document.querySelector('.hero');
+    var img = new Image();
+    var feito = false;
+    function mostra() { if (!feito) { feito = true; hero.classList.add('hero--pronta'); } }
+    img.src = matchMedia('(max-width: 480px)').matches ? 'assets/hero-mobile.webp' : 'assets/hero.webp';
+    if (img.complete) hero.classList.add('hero--sem-fade');   /* ja estava no cache: sem animacao */
+    if (img.decode) img.decode().then(mostra, mostra); else { img.onload = img.onerror = mostra; }
+    setTimeout(mostra, 15000);   /* rede travada: desiste de esperar e deixa o navegador desenhar */
+  })();
+</script>
 
 <!-- Banners: imagens e destinos vindos do proprio eusougustavosampaio.com.
      WebP em 1800 e 900px (o PNG original continua na pasta); o aspect-ratio fixa a
      proporcao do PNG, porque a versao de 900px arredonda a altura em meio pixel. -->
 <main class="cards">
-  <a class="card" href="https://www.eusougustavosampaio.com/opoderdaacao/">
-    <img src="assets/banners/03-poder-da-acao.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADQAwCdASogAAsAPt1kqU2opaQiMAgBEBuJZQAAXKd3ZELASPFazIAA/vXa2mNUjdKKGMA8RGNqCxFffokZGIvkOtmCm7jprkyO5z3mPkVJUxclbQvCp+puFW2y8o2I6UgM5/dDnqY14gAA)" href="https://www.eusougustavosampaio.com/opoderdaacao/">
+    <img onload="this.classList.add('ok')" src="assets/banners/03-poder-da-acao.webp"
          srcset="assets/banners/03-poder-da-acao-900.webp 900w, assets/banners/03-poder-da-acao.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" fetchpriority="high" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Treinamento O Poder da Acao">
   </a>
-  <a class="card" href="https://www.eusougustavosampaio.com/palestras/">
-    <img src="assets/banners/06-contrate-palestras.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAADQAwCdASogAAsAPt1ap0yopSOiMAgBEBuJQBTig29E0rTs0Y485CAA/uneACHKWNm4c2jiuF0j0laf5Bpjg8RbKTbus0xfM0nZwxtuWYGZvgKlj9wLR+Ej+1I24Y1w46qyR+ikub9nx9RrLkMd6jnGDzGiWGR1pyKYWPfh7ASSS8PRHHkQNX//gj6ZAFP9Km9vdzJNaJjuAo7bQBFqv2AL32IHAgAA)" href="https://www.eusougustavosampaio.com/palestras/">
+    <img onload="this.classList.add('ok')" src="assets/banners/06-contrate-palestras.webp"
          srcset="assets/banners/06-contrate-palestras-900.webp 900w, assets/banners/06-contrate-palestras.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Contrate palestras">
   </a>
-  <a class="card" href="https://www.eusougustavosampaio.com/treinamentos/">
-    <img src="assets/banners/08-treinamento-empresas.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASogAAsAPt1cpkyopSOiMAgBEBuJZwC/OBTBzU7VU8ntN/yiAAD+0DcDZSzdp4XgNDsvJJwEAVh1vCEWTR1aEau05eVTZLmK8g3pRT1vjj67DPcozj2o4r8DynWSVxoT3bZYfcjeTgKQAAAA)" href="https://www.eusougustavosampaio.com/treinamentos/">
+    <img onload="this.classList.add('ok')" src="assets/banners/08-treinamento-empresas.webp"
          srcset="assets/banners/08-treinamento-empresas-900.webp 900w, assets/banners/08-treinamento-empresas.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Treinamento empresas">
   </a>
-  <a class="card" href="https://www.eusougustavosampaio.com/metodocis">
-    <img src="assets/banners/01-metodo-cis.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAADwAwCdASogAAsAPt1apkyopSOiMAgBEBuJaACdAYvWtjqDIHf5SJtAAP6aHOmlGs0J76QDPtPov4ZWKGSfti1hBKo76QhU3DVIrHH0LfMpIB7myo4vdJr8+QWG/ZJGnw+02K2/WC7nKSXH4CuOVqXE0Fj/iCwCMVLO70xszEVhZ9yRxlv6xNm5+noED3u7ZJADt3AA)" href="https://www.eusougustavosampaio.com/metodocis">
+    <img onload="this.classList.add('ok')" src="assets/banners/01-metodo-cis.webp"
          srcset="assets/banners/01-metodo-cis-900.webp 900w, assets/banners/01-metodo-cis.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Metodo CIS">
   </a>
-  <a class="card" href="https://chk.eduzz.com/39VKE3GBWR">
-    <img src="assets/banners/02-homens-de-honra.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRsYAAABXRUJQVlA4ILoAAABwBACdASogAAsAPt1cpkyopSOiMAgBEBuJZACdAYxO223Hk1gwaLJsF8x1fAD+5kYAP6bapzQCiWryEnzfKCSgpxol+685TSfX7uyhZe+S9qRcJ7k4P7+0jVdtsLO8HkeqzvChko4VZvGNYyKh3WHpdgL9Uy/dzJXj/ZhneUDRlh2TxsCw5eOF+ayRfjzIu+tmDHqdZB4Y5qCrVMvb+yZF6PupNdCd5ozPDt+o5L5p8JnyG3GBZYQ4AAA=)" href="https://chk.eduzz.com/39VKE3GBWR">
+    <img onload="this.classList.add('ok')" src="assets/banners/02-homens-de-honra.webp"
          srcset="assets/banners/02-homens-de-honra-900.webp 900w, assets/banners/02-homens-de-honra.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="644" style="aspect-ratio: 1800 / 644"
          alt="Homens de Honra com Gustavo Sampaio - 05 de dezembro, Auditorio Family">
   </a>
-  <a class="card" href="https://www.eusougustavosampaio.com/mentoria/">
-    <img src="assets/banners/07-mentoria.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASogAAsAPt1cp0yopSOiMAgBEBuJZwDE2GlXhb6PiyH7v1ajqAD+/MQ6j86/z+ntsfNu3CwofH3MyS4fW+SOy//P/QNZ5xwrzN/CjHW6/1JK34cxopjyKbk0jEPaDUKzyWuhiNVvHGcr7JDE20QAAA==)" href="https://www.eusougustavosampaio.com/mentoria/">
+    <img onload="this.classList.add('ok')" src="assets/banners/07-mentoria.webp"
          srcset="assets/banners/07-mentoria-900.webp 900w, assets/banners/07-mentoria.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Mentoria">
   </a>
   <!-- um banner so para os dois contatos: abre a escolha logo abaixo -->
-  <a class="card" href="#contato" data-abre-contato>
-    <img src="assets/banners/09-contato.webp"
+  <a class="card" style="background-image: url(data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAAAQBACdASogAAsAPt1cpkyopSOiMAgBEBuJQBYdgzJCCN2gr+4pSrpvgAD+AZ4Rl/KUWmYHilT1+a9oNJk9RfVky+OxceO765r4UAsDm4okBvcW6TWWkkPwDouFbYDHfzZKMxcav+RnkaGY7LyDQ4NFHf440MSn6wzMRwPq/2SEHL67EEHWZsfsw7M37AAA)" href="#contato" data-abre-contato>
+    <img onload="this.classList.add('ok')" src="assets/banners/09-contato.webp"
          srcset="assets/banners/09-contato-900.webp 900w, assets/banners/09-contato.webp 1800w"
          sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Contato comercial e assessoria">

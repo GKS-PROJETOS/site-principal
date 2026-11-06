@@ -48,11 +48,34 @@ img { display: block; max-width: 100%; height: auto; }
   position: relative;
   height: var(--hero-h);
   background-color: var(--hero-bg);
-  background-image: url("assets/hero.webp");   /* mesma foto do hero.png, em WebP */
-  background-size: auto;              /* 2752x1536, tamanho natural */
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 06/11/2026 - duas camadas com o mesmo enquadramento: ::before e a previa borrada
+   (48px embutidos no HTML, ampliados), ::after e a foto de verdade, invisivel ate o
+   script marcar .hero--pronta. Assim a foto nunca aparece pela metade. */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: 2752px 1536px;     /* 2752x1536, tamanho natural */
   background-position: 58.5454% 11.363%;
   background-repeat: repeat-y;
 }
+.hero::before {
+  background-image: var(--hero-lqip);
+  filter: blur(18px);
+}
+.hero::after {
+  background-image: url("assets/hero.webp");   /* mesma foto do hero.png, em WebP */
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.hero--pronta::after { opacity: 1; }
+.hero--sem-fade::after { transition: none; }
 
 /* Toda a pagina se apoia num canvas de 980px CENTRADO, e cada bloco recebe um
    deslocamento proprio a partir da borda dele - inclusive negativo. E por isso
@@ -172,7 +195,12 @@ img { display: block; max-width: 100%; height: auto; }
 
 .card:hover { transform: scale(1.012); }
 
-.card img { width: 100%; }
+.card {
+  background-color: #1a1a1a;
+  background-size: cover;            /* previa borrada do banner, embutida no HTML */
+}
+.card img { width: 100%; opacity: 0; transition: opacity .35s ease; }
+.card img.ok { opacity: 1; }
 
 /* -------------------------------------------------------------- footer ---- */
 
@@ -200,7 +228,8 @@ img { display: block; max-width: 100%; height: auto; }
     --hero-overlap: 140px;
   }
 
-  .hero {
+  .hero::before,
+  .hero::after {
     background-size: cover;
     background-position: 72.206% 20.1038%;
   }
@@ -237,7 +266,17 @@ img { display: block; max-width: 100%; height: auto; }
   .footer { font-size: 13px; padding: 20px 16px 26px; }
 }
 
+/* ate 480px o celular so mostra a faixa x=1280..2272 da foto: vem so ela (hero-mobile.webp).
+   O +4.59px devolve o mesmo enquadramento do 72.206% sobre a foto inteira (escala 769/1536). */
+@media (max-width: 480px) {
+  .hero::before,
+  .hero::after { background-position: calc(72.206% + 4.59px) 0; }
+  .hero::before { background-image: var(--hero-lqip-m); }
+  .hero::after { background-image: url("assets/hero-mobile.webp"); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero::after, .card img { transition: none; }
   .card, .social__link, .contato__btn { transition: none; }
   .card:hover { transform: none; }
   /* sem o salto: so a cor ambar marca o icone sob o mouse */
