@@ -6,10 +6,10 @@
 <title>Gustavo Sampaio</title>
 <meta name="description" content="Gustavo Sampaio - palestras, mentoria e treinamentos para empresas.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Inter 400: a mesma familia e peso que o site original usa no hero -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<!-- 05/11/2026: carregamento no celular. A foto do hero (LCP) e a Inter saem do proprio
+     dominio e comecam a baixar antes do CSS; a Inter e o mesmo arquivo do Google Fonts. -->
+<link rel="preload" href="assets/hero.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -55,35 +55,51 @@
   </div>
 </section>
 
-<!-- Banners: imagens e destinos vindos do proprio eusougustavosampaio.com -->
+<!-- Banners: imagens e destinos vindos do proprio eusougustavosampaio.com.
+     WebP em 1800 e 900px (o PNG original continua na pasta); o aspect-ratio fixa a
+     proporcao do PNG, porque a versao de 900px arredonda a altura em meio pixel. -->
 <main class="cards">
   <a class="card" href="https://www.eusougustavosampaio.com/opoderdaacao/">
-    <img src="assets/banners/03-poder-da-acao.png" width="1800" height="643"
+    <img src="assets/banners/03-poder-da-acao.webp"
+         srcset="assets/banners/03-poder-da-acao-900.webp 900w, assets/banners/03-poder-da-acao.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" fetchpriority="high" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Treinamento O Poder da Acao">
   </a>
   <a class="card" href="https://www.eusougustavosampaio.com/palestras/">
-    <img src="assets/banners/06-contrate-palestras.png" width="1800" height="643"
+    <img src="assets/banners/06-contrate-palestras.webp"
+         srcset="assets/banners/06-contrate-palestras-900.webp 900w, assets/banners/06-contrate-palestras.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Contrate palestras">
   </a>
   <a class="card" href="https://www.eusougustavosampaio.com/treinamentos/">
-    <img src="assets/banners/08-treinamento-empresas.png" width="1800" height="643"
+    <img src="assets/banners/08-treinamento-empresas.webp"
+         srcset="assets/banners/08-treinamento-empresas-900.webp 900w, assets/banners/08-treinamento-empresas.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Treinamento empresas">
   </a>
   <a class="card" href="https://www.eusougustavosampaio.com/metodocis">
-    <img src="assets/banners/01-metodo-cis.png" width="1800" height="643"
+    <img src="assets/banners/01-metodo-cis.webp"
+         srcset="assets/banners/01-metodo-cis-900.webp 900w, assets/banners/01-metodo-cis.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Metodo CIS">
   </a>
   <a class="card" href="https://chk.eduzz.com/39VKE3GBWR">
-    <img src="assets/banners/02-homens-de-honra.png" width="1800" height="644"
+    <img src="assets/banners/02-homens-de-honra.webp"
+         srcset="assets/banners/02-homens-de-honra-900.webp 900w, assets/banners/02-homens-de-honra.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="644" style="aspect-ratio: 1800 / 644"
          alt="Homens de Honra com Gustavo Sampaio - 05 de dezembro, Auditorio Family">
   </a>
   <a class="card" href="https://www.eusougustavosampaio.com/mentoria/">
-    <img src="assets/banners/07-mentoria.png" width="1800" height="643"
+    <img src="assets/banners/07-mentoria.webp"
+         srcset="assets/banners/07-mentoria-900.webp 900w, assets/banners/07-mentoria.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Mentoria">
   </a>
   <!-- um banner so para os dois contatos: abre a escolha logo abaixo -->
   <a class="card" href="#contato" data-abre-contato>
-    <img src="assets/banners/09-contato.png" width="1800" height="643"
+    <img src="assets/banners/09-contato.webp"
+         srcset="assets/banners/09-contato-900.webp 900w, assets/banners/09-contato.webp 1800w"
+         sizes="(max-width: 767px) calc(100vw - 42px), 895px" loading="lazy" decoding="async" width="1800" height="643" style="aspect-ratio: 1800 / 643"
          alt="Contato comercial e assessoria">
   </a>
 </main>
