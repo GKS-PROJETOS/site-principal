@@ -141,7 +141,7 @@ img { display: block; max-width: 100%; height: auto; }
 .social {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 30px;
   margin-top: 44px;
   margin-left: -38px;       /* alinhado ao nome */
 }
@@ -177,8 +177,8 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* viewBox justo a arte, entao altura CSS == altura da tinta */
 .social__link { opacity: .85; -webkit-tap-highlight-color: transparent; }
-.social__link svg { width: auto; height: 26px; }
-.social__link--yt svg { height: 22px; }
+.social__link svg { width: auto; height: 32px; }
+.social__link--yt svg { height: 27px; }
 
 /* --------------------------------------------------------------- cards ---- */
 
@@ -219,13 +219,8 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* -------------------------------------------------------------- footer ---- */
 
-.footer {
-  padding: 22px 16px 30px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
-  color: #fff;
-}
+/* 13/11/2026: rodape padrao de todos os sites do Gustavo - mesmo texto, fonte, tamanho e cor. */
+.rodape-gs{border-top:1px solid rgba(255,255,255,.08);padding:28px 16px 32px;text-align:center;font-family:'Urbanist',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:13px;font-weight:400;line-height:1.5;letter-spacing:.02em;color:rgba(255,255,255,.55)}
 
 /* abaixo do canvas, o deslocamento de 30px nao cabe: volta a centrar */
 @media (max-width: 1010px) {
@@ -260,12 +255,11 @@ img { display: block; max-width: 100%; height: auto; }
   }
 
   /* icones centrados, com area de toque maior que o desenho */
-  .social { margin: 26px 0 0; width: 100%; justify-content: center; gap: 14px; }
+  .social { margin: 26px 0 0; width: 100%; justify-content: center; gap: 12px; }
   .social__link { padding: 10px; }
-  .social__link svg { height: 28px; }
-  .social__link--yt svg { height: 24px; }
+  .social__link svg { height: 34px; }
+  .social__link--yt svg { height: 29px; }
 
-  .footer { font-size: 13px; padding: 20px 16px 26px; }
 }
 
 /* ate 480px o celular so mostra a faixa x=1280..2272 da foto: vem so ela (hero-mobile.webp).
