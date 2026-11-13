@@ -187,7 +187,7 @@ img { display: block; max-width: 100%; height: auto; }
 
 .card {
   display: block;
-  border: 2px solid #fff;
+  border: 1px solid rgba(235, 203, 108, .45);
   border-radius: var(--card-radius);
   overflow: hidden;
   transition: transform .25s ease;
@@ -331,7 +331,7 @@ body:has(.escolha:target:not(.escolha--fechada)) { overflow: hidden; }
   align-items: center;
   text-align: center;
   padding: 34px 24px 30px;
-  border: 2px solid #fff;
+  border: 1px solid rgba(235, 203, 108, .45);
   border-radius: var(--card-radius);
   background: #111;
 }
