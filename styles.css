@@ -1,3 +1,4 @@
+html { -webkit-tap-highlight-color: transparent; }
 /* Gustavo Sampaio - pagina inicial
    Valores lidos direto do CSS aplicado em eusougustavosampaio.com, mais as
    posicoes de tinta medidas nos prints (viewport 1363x637).
@@ -13,8 +14,17 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("assets/fonts/inter-latin.woff2") format("woff2");
+  src: url("assets/fonts/inter-latin.woff2?v=20261113") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* 13/11/2026: Urbanist, a fonte do padrao do Gustavo (mesma das artes da vitrine), so no nome. */
+@font-face {
+  font-family: "Urbanist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/urbanist-latin.woff2?v=20261113") format("woff2");
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -70,7 +80,7 @@ img { display: block; max-width: 100%; height: auto; }
   filter: blur(18px);
 }
 .hero::after {
-  background-image: url("assets/hero.webp");   /* mesma foto do hero.png, em WebP */
+  background-image: url("assets/hero.webp?v=20261113");   /* mesma foto do hero.png, em WebP */
   opacity: 0;
   transition: opacity .45s ease;
 }
@@ -84,7 +94,7 @@ img { display: block; max-width: 100%; height: auto; }
    da janela, que era o defeito do 100vh + cover. */
 .hero__inner {
   position: absolute;
-  top: 83px;                /* poe o topo da caixa do G em y=98 */
+  top: 250px;
   left: 0;
   right: 0;
   width: var(--canvas-w);
@@ -92,29 +102,38 @@ img { display: block; max-width: 100%; height: auto; }
   margin: 0 auto;
 }
 
+/* 13/11/2026: nome no padrao das artes - Urbanist 800, GUSTAVO branco e SAMPAIO no
+   degrade dourado da pagina de Palestras. Sem tracking, alinhado a esquerda. */
 .hero__name {
-  margin: 0 0 0 -38px;      /* centrado com a fileira de icones sociais abaixo */
-  font-weight: 400;
-  display: inline-block;    /* encolhe ate a largura do GUSTAVO */
-  text-align: center;       /* e centra o SAMPAIO nela */
+  margin: 0 0 0 -38px;
+  font-family: "Urbanist", var(--font);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: .9;
+  letter-spacing: -.01em;
 }
 
 .hero__first,
-.hero__last { display: block; white-space: nowrap; }
-
-.hero__first {
-  font-size: 120px;
-  line-height: 120px;
-  letter-spacing: normal;
-}
+.hero__last { display: block; white-space: nowrap; font-size: 124px; }
 
 .hero__last {
-  font-size: 71px;
-  line-height: 85.2px;
-  letter-spacing: 25px;
-  text-indent: 25px;        /* compensa o tracking que sobra apos a ultima letra */
-  margin-top: -18px;        /* linha de base a 68px da do GUSTAVO */
+  background: linear-gradient(180deg, #EBCB6D, #BAA33C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
+
+/* veu escuro: o nome le melhor e o fim da foto se funde no preto da vitrine */
+.hero__veu {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.72) 38%, rgba(0,0,0,.2) 56%, rgba(0,0,0,0) 66%),
+    linear-gradient(0deg, #000 0%, rgba(0,0,0,0) 28%);
+}
+.hero__inner { z-index: 1; }
 
 /* icones sociais - tinta medida: 67 / 81 / 71 / 69 / 42 px de largura,
    inicios em x = 136 / 265 / 415 / 547 / 690, centros em y=358 */
@@ -122,16 +141,10 @@ img { display: block; max-width: 100%; height: auto; }
 .social {
   display: flex;
   align-items: center;
-  margin-top: 49px;         /* centro dos icones em y=358 */
-  margin-left: -52px;       /* primeiro icone 52px a esquerda do canvas */
+  gap: 26px;
+  margin-top: 44px;
+  margin-left: -38px;       /* alinhado ao nome */
 }
-
-/* os vaos do original nao sao iguais (cada glifo tem sua propria largura de
-   avanco na fonte de icones), entao vao um a um em vez de um gap unico */
-.social__link--yt { margin-left: 62px; }
-.social__link--li { margin-left: 69px; }
-.social__link--tt { margin-left: 61px; }
-.social__link--fb { margin-left: 74px; }
 
 .social__link {
   color: #fff;
@@ -163,11 +176,9 @@ img { display: block; max-width: 100%; height: auto; }
 .social__link:active { transform: translateY(-2px) scale(1.02); }
 
 /* viewBox justo a arte, entao altura CSS == altura da tinta */
-.social__link svg { width: auto; height: 67px; }
-.social__link--yt svg { height: 58px; }
-.social__link--li svg { height: 71px; }
-.social__link--tt svg { height: 79px; }
-.social__link--fb svg { height: 77px; }
+.social__link { opacity: .85; -webkit-tap-highlight-color: transparent; }
+.social__link svg { width: auto; height: 26px; }
+.social__link--yt svg { height: 22px; }
 
 /* --------------------------------------------------------------- cards ---- */
 
@@ -193,7 +204,11 @@ img { display: block; max-width: 100%; height: auto; }
   transition: transform .25s ease;
 }
 
-.card:hover { transform: scale(1.012); }
+/* 13/11/2026: no celular o :hover grudava (o card crescia e voltava) e o navegador
+   pintava um fundo azul no toque. Zoom so com mouse; foco so pelo teclado, em dourado. */
+.card { -webkit-tap-highlight-color: transparent; outline: none; }
+@media (hover: hover) and (pointer: fine) { .card:hover { transform: scale(1.012); } }
+.card:focus-visible { outline: 2px solid #EBCB6C; outline-offset: 3px; }
 
 .card {
   background-color: #1a1a1a;
@@ -234,34 +249,21 @@ img { display: block; max-width: 100%; height: auto; }
     background-position: 72.206% 20.1038%;
   }
 
-  .hero__inner { width: 100%; top: 53.8%; }
-  .hero__name { margin-left: 3%; }
+  .hero__inner { width: 100%; top: auto; bottom: calc(var(--hero-overlap) + 34px); padding: 0 24px; }
+  .hero__name { margin-left: 0; }
   .cards { padding: 0 19px; }   /* no mobile o site usa ~19px de goteira */
 
-  .hero__first { font-size: 44px; line-height: 44px; }
+  .hero__first, .hero__last { font-size: 60px; }
 
-  .hero__last {
-    font-size: 29px;
-    line-height: 34.8px;
-    letter-spacing: normal;   /* no mobile o site nao aplica tracking */
-    text-indent: 0;
-    margin-top: -4px;
+  .hero__veu {
+    background: linear-gradient(0deg, #000 0%, #000 calc(var(--hero-overlap) - 10px), rgba(0,0,0,.72) 46%, rgba(0,0,0,0) 66%);
   }
 
-  /* icones maiores que a proporcao literal do desktop (o clone original tinha
-     ficado pequeno e colado nos cards abaixo), centrados na tela em vez de
-     alinhados ao nome. O padding cresce a area de toque sem mudar o passo. */
-  .social { margin-top: 26px; margin-left: 0; width: 100%; justify-content: center; }
-  .social__link { padding: 8px; }
-  .social__link--yt { margin-left: 22px; }
-  .social__link--li { margin-left: 26px; }
-  .social__link--tt { margin-left: 21px; }
-  .social__link--fb { margin-left: 30px; }
-  .social__link svg { height: 36px; }
-  .social__link--yt svg { height: 31px; }
-  .social__link--li svg { height: 38px; }
-  .social__link--tt svg { height: 42px; }
-  .social__link--fb svg { height: 41px; }
+  /* icones centrados, com area de toque maior que o desenho */
+  .social { margin: 26px 0 0; width: 100%; justify-content: center; gap: 14px; }
+  .social__link { padding: 10px; }
+  .social__link svg { height: 28px; }
+  .social__link--yt svg { height: 24px; }
 
   .footer { font-size: 13px; padding: 20px 16px 26px; }
 }
@@ -272,7 +274,7 @@ img { display: block; max-width: 100%; height: auto; }
   .hero::before,
   .hero::after { background-position: calc(72.206% + 4.59px) 0; }
   .hero::before { background-image: var(--hero-lqip-m); }
-  .hero::after { background-image: url("assets/hero-mobile.webp"); }
+  .hero::after { background-image: url("assets/hero-mobile.webp?v=20261113"); }
 }
 
 @media (prefers-reduced-motion: reduce) {
